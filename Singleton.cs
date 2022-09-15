@@ -7,7 +7,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     private static T instance;
 
-    private static bool isDestroyed;
+    private static bool hasDestroyed;
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     { 
         get {
 
-            if (isDestroyed)
+            if (hasDestroyed)
             {
                 Debug.LogError("(SINGLETON)" + typeof(T) + " : has been destroyed but you have still try to use!");
                 return null;
@@ -57,12 +57,12 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        isDestroyed = true;
+        hasDestroyed = true;
     }
 
     private void OnDestroy()
     {
-        isDestroyed = true;
+        hasDestroyed = true;
     }
 
 }
