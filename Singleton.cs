@@ -7,6 +7,8 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     private static T instance;
 
+    private static bool isDestroyed;
+
     private void Awake()
     {
         if (instance == null)
@@ -26,6 +28,12 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     { 
         get {
 
+            if (isDestroyed)
+            {
+                Debug.LogError("(SINGLETON)" + typeof(T) + " : has been destroyed but you have still try to use!");
+                return null;
+            }
+
             if (instance == null)
             {
                 instance = FindObjectOfType<T>();
@@ -35,7 +43,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                     GameObject go = new GameObject();
                     instance = go.AddComponent<T>();
 
-                    go.name = typeof(T) + "_SINGLETON";
+                    go.name = typeof(T).ToString() + "_SINGLETON_CREATED";
 
                     DontDestroyOnLoad(instance);
 
@@ -44,6 +52,17 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
             return instance;
         }  
+    }
+
+
+    private void OnApplicationQuit()
+    {
+        isDestroyed = true;
+    }
+
+    private void OnDestroy()
+    {
+        isDestroyed = true;
     }
 
 }
