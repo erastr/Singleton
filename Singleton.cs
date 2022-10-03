@@ -30,7 +30,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
             if (hasDestroyed)
             {
-                Debug.LogError("(SINGLETON)" + typeof(T) + " : has been destroyed but you have still try to use!"); // Nesne yok edildi fakat hala kullanılmaya çalışılıyor
+                Debug.LogError("(SINGLETON)" + typeof(T) + " : has been destroyed but you are still trying to acces it!"); // Nesne yok edildi fakat hala kullanılmaya çalışılıyor
                 return null;
             }
 
