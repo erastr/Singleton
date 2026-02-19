@@ -12,11 +12,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     private void Awake()
     {
         if (instance == null)
-        {
-            instance = FindObjectOfType<T>();
-
-            DontDestroyOnLoad(instance);
-        }
+          instance = FindObjectOfType<T>();
         else
         {
             if (instance != this) 
@@ -45,8 +41,6 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
                     go.name = typeof(T).ToString() + "_SINGLETON_CREATED";
 
-                    DontDestroyOnLoad(instance);
-
                 }
             }
 
@@ -66,3 +60,4 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     }
 
 }
+
